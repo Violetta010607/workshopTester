@@ -4,6 +4,8 @@ let stateRecording = 0;
 
 var recordButton;
 var downloadButton;
+// var wbName;
+var activityCount;
 // var timer;
 // var player, audioRecord;
 
@@ -23,6 +25,9 @@ function setup() {
   downloadButton = select("#downloadButton");
   downloadButton.mousePressed(downloadPressed);
 
+  // wbName = select("#wbName");
+  activityCount = select('#wbActivity');
+
   // player = select("#player");
   // audioRecord = select('#audioSrc');
 
@@ -31,6 +36,7 @@ function setup() {
 
   // prompts user to enable their browser mic
   mic.start();
+  // getAudioContext().resume();
 
   // create a sound recorder
   recorder = new p5.SoundRecorder();
@@ -48,6 +54,7 @@ function setup() {
 function canvasPressed() {
   // ensure audio is enabled
   userStartAudio();
+  // getAudioContext().resume();
 
   console.log(stateRecording);
 
@@ -98,7 +105,7 @@ function downloadPressed(){
     console.log(stateRecording+" save recording");
     soundDownload.play();
     soundFile.play(); // play the result!
-    save(soundFile, 'reflection-activity01.wav');
+    save(soundFile, trim(activityCount.html())+'.wav');
     // audioRecord.src = soundFile;
     // player.play();
     stateRecording = 0;
